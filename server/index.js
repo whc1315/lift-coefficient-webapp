@@ -53,4 +53,4 @@ app.delete("/api/liftCoefficient/:idx", (req, res) => {
 
 const port = process.env.PORT || process.env.SERVER_PORT;
 
-app.listen(5500, () => console.log(`Lift off on 5500!`));
+app.listen(port, () => console.log(`Lift off on ${port}!`));
