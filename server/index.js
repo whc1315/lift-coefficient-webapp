@@ -11,13 +11,15 @@ const rollbar = new Rollbar({
   captureUnhandledRejections: true,
 });
 
+rollbar.log("Hello world!");
+
 app.use(express.json());
 
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   console.log("hit");
-  // rollbar.log("Someone hit the server!");
+  rollbar.log("Someone hit the server!");
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
