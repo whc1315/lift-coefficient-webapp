@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 header {
   background: #3470f1;
   text-align: center;
@@ -18,6 +24,12 @@ h2 {
   font-size: 36px;
   text-align: right;
   color: aliceblue;
+}
+
+#main {
+  margin: 0 auto;
+  padding: 20px 20px;
+  padding-bottom: 61px;
 }
 
 input[type="text"],
@@ -64,17 +76,20 @@ form {
   height: 300px;
 }
 
+p {
+  font-size: 24px;
+  color: rgb(3, 133, 247);
+  cursor: pointer;
+}
+
 footer {
   background: #f13210;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   justify-content: space-evenly;
-  font-size: 64px;
-  color: aliceblue;
-}
-
-p {
   font-size: 24px;
   color: aliceblue;
-  cursor: pointer;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
