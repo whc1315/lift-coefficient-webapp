@@ -24,7 +24,6 @@
       <section></section>
     </form>
     <section class="column.side">
-      <button id="aDBtn">Get Common Air Densitys</button>
       <a href="https://en.wikipedia.org/wiki/Lift_coefficient">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Lift_curve.svg/1920px-Lift_curve.svg.png"
@@ -42,12 +41,7 @@
       const v = document.getElementById("flowSpeed");
       const p = document.getElementById("airDensity");
       const answer = l / (p * (v * v) * (a / 2));
-      const airDensVals = "Common Air Denisty - Sea Level: 0.0764, 5280ft: 0.0627"
       const container = document.querySelector("section");
-
-      function showAirDensity(res) {
-        container.innerHTML = "";
-        airDensVals.value = "";
 
       function showLiftCo(res) {
         container.innerHTML = "";
@@ -101,10 +95,10 @@
 
       // get student list on initial load
       axios.get("/api/liftCoefficient").then((res) => {
-        airDensVals(res);
+        showLiftCo(res);
       });
 
-      addForm.addEventListener("click", submitHandler);
+      addForm.addEventListener("submit", submitHandler);
     </script>
     <footer>Go Take Flight!</footer>
   </body>
