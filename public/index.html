@@ -14,24 +14,23 @@
       <img src="plane.png" alt="Airplane" id="plane" />
       <h2 id="equation">Cl = l/(p(v^2)(a/2))</h2>
     </header>
-    <section id="main">
-      <form class="column.middle">
-        <input type="text" placeholder="Lift Force lbf" id="liftForce" />
-        <input type="text" placeholder="Surface Area in^2" id="surfaceArea" />
-        <input type="text" placeholder="Flow Speed ft/s" id="flowSpeed" />
-        <input type="text" placeholder="Air Density lbs/ft^3" id="airDensity" />
-        <button id="liftBtn">Calculate Lift Coefficient</button>
-        <section></section>
-      </form>
-      <section class="column.side">
-        <a href="https://en.wikipedia.org/wiki/Lift_coefficient">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Lift_curve.svg/1920px-Lift_curve.svg.png"
-            alt="Lift Coefficient Graph"
-            id="graph"
-          />
-        </a>
-      </section>
+
+    <form class="column.middle">
+      <input type="text" placeholder="Lift Force lbf" id="liftForce" />
+      <input type="text" placeholder="Surface Area in^2" id="surfaceArea" />
+      <input type="text" placeholder="Flow Speed ft/s" id="flowSpeed" />
+      <input type="text" placeholder="Air Density lbs/ft^3" id="airDensity" />
+      <button id="liftBtn">Calculate Lift Coefficient</button>
+      <section></section>
+    </form>
+    <section class="column.side">
+      <a href="https://en.wikipedia.org/wiki/Lift_coefficient">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Lift_curve.svg/1920px-Lift_curve.svg.png"
+          alt="Lift Coefficient Graph"
+          id="graph"
+        />
+      </a>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
