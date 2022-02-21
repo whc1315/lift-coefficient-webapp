@@ -23,11 +23,14 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-const aDCLArr = ["Common Air Denisty - Sea Level: 0.0764, 5280ft: 0.0627"];
+const cLArr = ["Lift Coefficients:"];
+const airDensityArr = [
+  "Common Air Denisty - Sea Level: 0.0764, 5280ft: 0.0627",
+];
 
 app.get("/api/liftCoefficient", (req, res) => {
-  rollbar.info("Someone got all the Lift Coefficients");
-  res.status(200).send(aDCLArr);
+  rollbar.info("Someone got the Air Densities");
+  res.status(200).send(airDensityArr);
 });
 
 app.post("/api/liftCoefficient", (req, res) => {
@@ -37,20 +40,20 @@ app.post("/api/liftCoefficient", (req, res) => {
   let v = flowSpeed;
   let p = airDensity;
   let answer = l / (p * (v * v) * (a / 2));
-  aDCLArr.push(answer);
+  cLArr.push(answer);
 
-  res.status(200).send(aDCLArr);
+  res.status(200).send(cLArr);
 });
 
 app.delete("/api/liftCoefficient/:idx", (req, res) => {
   if (req.params.idx === "0") {
-    rollbar.error("Someone tried to delete Air Densitys!");
-    return res.status(403).send(aDCLArr);
+    rollbar.error("Someone tried to delete Lift Coefficient!");
+    return res.status(403).send(cLArr);
   }
-  rollbar.info(`Someone deleted Lift Coefficient ${aDCLArr[+req.params.idx]}`);
-  aDCLArr.splice(+req.params.idx, 1);
+  rollbar.info(`Someone deleted Lift Coefficient ${cLArr[+req.params.idx]}`);
+  cLArr.splice(+req.params.idx, 1);
 
-  res.status(200).send(aDCLArr);
+  res.status(200).send(cLArr);
 });
 
 const port = process.env.PORT || process.env.SERVER_PORT;
