@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aero Forum</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header id="header">
+      <h1 id="Title">Aero Forum</h1>
+      <img src="plane.png" alt="Airplane" id="plane" />
+      <h2 id="equation">Cl = l/(p(v^2)(a/2))</h2>
+    </header>
+
+    <nav>
+      <ol>
+        <li class="crumb">
+          <a href="./index.html">Lift Coefficient Calculator</a>
+        </li>
+      </ol>
+    </nav>
+
+    <form id="forumForm" class="column.middle">
+      <input type="text" id="title" placeholder="Post Title Here..." />
+      <input type="text" id="post" placeholder="Post here..." />
+      <button id="forumBtn">Post!</button>
+      <section></section>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+      const addForm = document.querySelector("form");
+      const title = document.getElementById("title");
+      const post = document.getElementById("post");
+      const forumPost = `${title} ${post}`;
+      const container = document.querySelector("section");
+
+      function showPost(res) {
+        container.innerHTML = "";
+        forumPost.value = "";
+
+        res.data.forEach((forum, index) => {
+          container.innerHTML += `<p aeroPost=${index}>${forum}</p>`;
+        });
+
+        document.querySelectorAll("p").forEach((element) => {
+          const theIndexValue = element.getAttribute("aeroPost");
+
+          element.addEventListener("click", () => {
+            axios.delete(`/api/forum/${theIndexValue}`).then((res) => {
+              showPost(res);
+            });
+          });
+        });
+      }
+
+      function submitHandler(evt) {
+        evt.preventDefault();
+
+        axios
+          .post("/api/forum", {
+            title: title.value,
+            post: post.value,
+          })
+          .then((res) => {
+            showPost(res);
+          })
+          .catch((err) => {
+            forumPost.value = "";
+
+            const notif = document.createElement("aside");
+            notif.innerHTML = `<p>${err.response.data}</p>
+                <button class="close">close</button>`;
+            document.body.appendChild(notif);
+
+            document.querySelectorAll(".close").forEach((btn) => {
+              btn.addEventListener("click", (e) => {
+                e.target.parentNode.remove();
+              });
+            });
+          });
+      }
+
+      axios.get("/api/forum").then((res) => {
+        showPost(res);
+      });
+
+      addForm.addEventListener("submit", submitHandler);
+    </script>
+
+    <footer>Welcome to Flight Talks!</footer>
+  </body>
+</html>
