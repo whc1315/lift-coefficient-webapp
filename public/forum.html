@@ -68,10 +68,13 @@
             showPost(res);
           })
           .catch((err) => {
-            forumPost.value = "";
+            title.value = "";
+            post.value = "";
 
             const notif = document.createElement("aside");
-            notif.innerHTML = `<p>${err.response.data}</p>
+            notif.innerHTML = ` <p>${title.value}: <br>
+                ${post.value}
+            </p>
                 <button class="close">close</button>`;
             document.body.appendChild(notif);
 

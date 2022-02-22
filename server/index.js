@@ -70,13 +70,17 @@ app.post("/api/forum", (req, res) => {
   let { title, post } = req.body;
   const ttle = title;
   const pst = post;
-  const forumPost = ttle + pst;
+  const forumPost = `${ttle}: <br> ${pst}`;
   forumArr.unshift(forumPost);
 
   res.status(200).send(forumArr);
 });
 
 app.delete("/api/forum/:idx", (req, res) => {
+  if (req.params.idx <= "2") {
+    rollbar.error("Forum posts are getting low!");
+    return res.status(403).send(forumArr);
+  }
   rollbar.info(`Someone deleted forum post ${forumArr[+req.params.idx]}`);
   forumArr.splice(+req.params.idx, 1);
 
