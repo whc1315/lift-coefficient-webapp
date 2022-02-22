@@ -29,7 +29,9 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/forum.html"));
 });
 
-const aDCLArr = ["Common Air Denisty - Sea Level: 0.0764, 5280ft: 0.0627"];
+const aDCLArr = [
+  "Common Air Denisty - Sea Level: 0.0764, 5280ft: 0.0627 <br> Lift Coefficients:",
+];
 
 app.get("/api/liftCoefficient", (req, res) => {
   rollbar.info("Someone got all the Lift Coefficients");
