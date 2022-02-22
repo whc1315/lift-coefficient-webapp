@@ -23,6 +23,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+app.get("/", (req, res) => {
+  console.log("hit");
+  rollbar.log("Someone hit the server!");
+  res.sendFile(path.join(__dirname, "../public/forum.html"));
+});
+
 const aDCLArr = ["Common Air Denisty - Sea Level: 0.0764, 5280ft: 0.0627"];
 
 app.get("/api/liftCoefficient", (req, res) => {
@@ -51,6 +57,30 @@ app.delete("/api/liftCoefficient/:idx", (req, res) => {
   aDCLArr.splice(+req.params.idx, 1);
 
   res.status(200).send(aDCLArr);
+});
+
+const forumArr = [];
+
+app.get("/api/forum", (req, res) => {
+  rollbar.info("Someone got all the forum posts!");
+  res.status(200).send(forumArr);
+});
+
+app.post("/api/forum", (req, res) => {
+  let { title, post } = req.body;
+  const ttle = title;
+  const pst = post;
+  const forumPost = ttle + pst;
+  forumArr.unshift(forumPost);
+
+  res.status(200).send(forumArr);
+});
+
+app.delete("/api/forum/:idx", (req, res) => {
+  rollbar.info(`Someone deleted forum post ${forumArr[+req.params.idx]}`);
+  forumArr.splice(+req.params.idx, 1);
+
+  res.status(200).send(forumArr);
 });
 
 const port = process.env.PORT || process.env.SERVER_PORT;

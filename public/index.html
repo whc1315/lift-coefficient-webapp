@@ -15,6 +15,12 @@
       <h2 id="equation">Cl = l/(p(v^2)(a/2))</h2>
     </header>
 
+    <nav>
+      <ol>
+        <li class="crumb"><a href="./forum.html">Aero Forum</a></li>
+      </ol>
+    </nav>
+
     <form class="column.middle">
       <input type="text" placeholder="Lift Force lbf" id="liftForce" />
       <input type="text" placeholder="Surface Area in^2" id="surfaceArea" />
@@ -24,7 +30,7 @@
       <section></section>
     </form>
     <section class="column.side">
-      <a href="https://en.wikipedia.org/wiki/Lift_coefficient">
+      <a target="_blank" href="https://en.wikipedia.org/wiki/Lift_coefficient">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Lift_curve.svg/1920px-Lift_curve.svg.png"
           alt="Lift Coefficient Graph"
@@ -78,7 +84,7 @@
             showLiftCo(res);
           })
           .catch((err) => {
-            nameInput.value = "";
+            answer.value = "";
 
             const notif = document.createElement("aside");
             notif.innerHTML = `<p>${err.response.data}</p>
@@ -93,7 +99,6 @@
           });
       }
 
-      // get student list on initial load
       axios.get("/api/liftCoefficient").then((res) => {
         showLiftCo(res);
       });
