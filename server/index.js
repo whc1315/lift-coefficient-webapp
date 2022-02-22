@@ -72,7 +72,7 @@ app.post("/api/forum", (req, res) => {
   let { title, post } = req.body;
   const ttle = title;
   const pst = post;
-  const forumPost = `${ttle}: <br> ${pst}`;
+  const forumPost = `${ttle.toUpperCase()} <br> ${pst}`;
   forumArr.unshift(forumPost);
 
   res.status(200).send(forumArr);
