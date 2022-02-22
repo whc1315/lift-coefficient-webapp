@@ -61,7 +61,9 @@ app.delete("/api/liftCoefficient/:idx", (req, res) => {
   res.status(200).send(aDCLArr);
 });
 
-const forumArr = [];
+const forumArr = [
+  "PRINCIPLES OF FLIGHT IN ACTION <br> This is a great article! A Boeing 747 is flying at an altitude of 12,192 meters and has a velocity of 265.5 m/s. The aircraft has a wing area of 510.97 m2. The coefficient of lift is 0.52 and the density is of air at 12,192 meters is approximately 0.30267 kg/m3. The weight of the 747 is 2,833,500 N (637,000 pounds). <br> https://www.google.com/search?q=what+is+the+lift+coefficient+of+a+boeing+747&rlz=1C5CHFA_enUS956US967&sxsrf=APq-WBuecvZbYs7zx1lLcKACCEIKH9FHdQ%3A1645561306806&ei=2kUVYr3hMPrQkPIPqpmVuAY&oq=what+is+the+lift+coefficient&gs_lcp=Cgdnd3Mtd2l6EAMYBTIFCAAQgAQyBggAEAcQHjIGCAAQBxAeMgYIABAHEB4yBQgAEIAEMgQIABAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB46BwgjELADECc6BwgAEEcQsAM6BwgjELACECc6BAgAEA06BAgjECc6CAgAEAgQBxAeOgYIABANEB46BQgAEIYDSgQIQRgASgQIRhgAUPMeWJYzYNRaaAFwAHgAgAGFAYgBlgqSAQMzLjmYAQCgAQHIAQrAAQE&sclient=gws-wiz",
+];
 
 app.get("/api/forum", (req, res) => {
   rollbar.info("Someone got all the forum posts!");
@@ -69,17 +71,18 @@ app.get("/api/forum", (req, res) => {
 });
 
 app.post("/api/forum", (req, res) => {
-  let { title, post } = req.body;
+  let { title, post, url } = req.body;
   const ttle = title;
   const pst = post;
-  const forumPost = `${ttle.toUpperCase()} <br> ${pst}`;
+  const uRL = url;
+  const forumPost = `${ttle.toUpperCase()} <br> ${pst} <br> ${uRL}<br>`;
   forumArr.unshift(forumPost);
 
   res.status(200).send(forumArr);
 });
 
 app.delete("/api/forum/:idx", (req, res) => {
-  if (req.params.idx <= "2") {
+  if (req.params.idx <= "1") {
     rollbar.error("Forum posts are getting low!");
     return res.status(403).send(forumArr);
   }

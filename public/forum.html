@@ -25,6 +25,7 @@
     <form id="forumForm" class="column.middle">
       <input type="text" id="title" placeholder="Post Title Here..." />
       <input type="text" id="post" placeholder="Post here..." />
+      <input type="text" id="url" placeholder="URL here..." />
       <button id="forumBtn">Post!</button>
       <section></section>
     </form>
@@ -34,7 +35,8 @@
       const addForm = document.querySelector("form");
       const title = document.getElementById("title");
       const post = document.getElementById("post");
-      const forumPost = `${title} ${post}`;
+      const url = document.getElementById("url");
+      const forumPost = `${title} ${post} ${url}`;
       const container = document.querySelector("section");
 
       function showPost(res) {
@@ -63,6 +65,7 @@
           .post("/api/forum", {
             title: title.value,
             post: post.value,
+            url: url.value,
           })
           .then((res) => {
             showPost(res);
@@ -70,10 +73,11 @@
           .catch((err) => {
             title.value = "";
             post.value = "";
+            url.value = "";
 
             const notif = document.createElement("aside");
-            notif.innerHTML = ` <p>${title.value}: <br>
-                ${post.value}
+            notif.innerHTML = ` <p>${title.value} <br>
+                ${post.value} <br> ${url.value}
             </p>
                 <button class="close">close</button>`;
             document.body.appendChild(notif);
